@@ -4,7 +4,7 @@ module Products
     before_action :set_product
 
     def create
-      @product.subscribers.where(email: subscriber_params['email']).first_or_create
+      @product.subscribers.where(email: subscriber_params["email"]).first_or_create
       redirect_to @product, notice: "You have subscribed to this product."
     end
 

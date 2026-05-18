@@ -9,6 +9,7 @@ module Products
     end
 
     private
+
     def set_subscriber
       @subscriber = product.subscribers.find_by_token_for(:unsubscribe, params[:token])
     end
