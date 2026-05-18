@@ -4,5 +4,6 @@ Rails.application.routes.draw do
   root "products#index"
   resources :products do
     resources :subscribers, only: %i[create], controller: "products/subscribers"
+    resource :unsubscribe, only: [ :show ], controller: "products/unsubscribe"
   end
 end

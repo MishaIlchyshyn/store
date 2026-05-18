@@ -2,3 +2,5 @@ Good news!
 
 <%= @product.name %> is back in stock.
 <%= product_url(@product) %>
+
+Unsubscribe: <%= product_unsubscribe_url(@product, token: @subscriber.generate_token_for(:unsubscribe)) %>
