@@ -3,4 +3,5 @@ class Product < ApplicationRecord
   has_one_attached :featured_image
 
   validates :name, presence: true
+  validates :inventory_count, numericality: { only_integer: true, greater_than_or_equal_to: 0 }
 end
