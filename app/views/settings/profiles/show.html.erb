@@ -16,6 +16,11 @@
   </div>
 
   <div>
+    <%= form.label :email_address %>
+    <%= form.email_field :email_address, required: true, autocomplete: "example@gmail.com" %>
+  </div>
+
+  <div>
     <%= form.submit "Update profile" %>
   </div>
 <% end %>

@@ -14,6 +14,8 @@ Rails.application.routes.draw do
     root to: redirect("/settings/profile")
 
     resource :password, only: %i[ show update ]
-    resource :profile, only: %i[ show update destroy ]
+    resource :profile, only: %i[ show update destroy ] do
+      get "confirm_email", on: :collection
+    end
   end
 end
