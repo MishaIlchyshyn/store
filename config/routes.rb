@@ -18,4 +18,11 @@ Rails.application.routes.draw do
       get "confirm_email", on: :collection
     end
   end
+
+  namespace :store do
+    root to: redirect("/settings/products")
+
+    resources :users
+    resources :products
+  end
 end
