@@ -14,6 +14,6 @@ Rails.application.routes.draw do
     root to: redirect("/settings/profile")
 
     resource :password, only: %i[ show update ]
-    resource :profile, only: %i[ show update ]
+    resource :profile, only: %i[ show update destroy ]
   end
 end

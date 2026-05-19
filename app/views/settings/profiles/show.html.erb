@@ -19,3 +19,9 @@
     <%= form.submit "Update profile" %>
   </div>
 <% end %>
+
+<%= button_to "Delete my account",
+              settings_profile_path,
+              method: :delete,
+              data: { turbo_confirm: "Are you sure? This cannot be undone." }
+%>
