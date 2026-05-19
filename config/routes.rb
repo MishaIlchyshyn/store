@@ -18,4 +18,8 @@ Rails.application.routes.draw do
       get "confirm_email", on: :collection
     end
   end
+
+  namespace :store do
+    resources :users
+  end
 end
