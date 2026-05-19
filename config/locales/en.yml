@@ -31,3 +31,8 @@ en:
   products:
     index:
       title: "Product List"
+
+  activerecord:
+    attributes:
+      user:
+        password_challenge: "Current password"

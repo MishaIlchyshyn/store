@@ -26,9 +26,11 @@
   <nav>
     <%= link_to "Home", root_path %>
     <% if authenticated? %>
+      <%= link_to "Profile settings", settings_root_path %>
       <%= button_to "Log out", session_path, method: :delete %>
     <% else %>
       <%= link_to "Log in", new_session_path %>
+      <%= link_to "Sign up", sign_up_path %>
     <% end %>
   </nav>
 

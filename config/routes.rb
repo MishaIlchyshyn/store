@@ -1,10 +1,19 @@
 Rails.application.routes.draw do
+  root "products#index"
+
   resource :session
   resources :passwords, param: :token
   resource :sign_up
-  root "products#index"
+
   resources :products do
     resources :subscribers, only: %i[create], controller: "products/subscribers"
     resource :unsubscribe, only: [ :show ], controller: "products/unsubscribe"
+  end
+
+  namespace :settings do
+    root to: redirect("/settings/profile")
+
+    resource :password, only: %i[ show update ]
+    resource :profile, only: %i[ show update ]
   end
 end
