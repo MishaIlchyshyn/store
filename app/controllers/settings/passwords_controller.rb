@@ -1,5 +1,5 @@
 module Settings
-  class PasswordsController < ApplicationController
+  class PasswordsController < BaseController
     def show
     end
 

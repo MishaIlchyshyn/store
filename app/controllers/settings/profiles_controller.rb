@@ -1,5 +1,5 @@
 module Settings
-  class ProfilesController < ApplicationController
+  class ProfilesController < BaseController
     def show
     end
 

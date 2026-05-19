@@ -23,21 +23,23 @@
     <%= javascript_importmap_tags %>
   </head>
 
-  <nav>
-    <%= link_to "Home", root_path %>
-    <% if authenticated? %>
-      <%= link_to "Profile settings", settings_root_path %>
-      <%= button_to "Log out", session_path, method: :delete %>
-    <% else %>
-      <%= link_to "Log in", new_session_path %>
-      <%= link_to "Sign up", sign_up_path %>
-    <% end %>
-  </nav>
-
   <body>
     <div class="notice"><%= flash[:notice] %></div>
     <div class="alert"><%= flash[:alert] %></div>
 
-    <%= yield %>
+    <nav class="navbar">
+      <%= link_to "Home", root_path %>
+      <% if authenticated? %>
+        <%= link_to "Profile settings", settings_root_path %>
+        <%= button_to "Log out", session_path, method: :delete %>
+      <% else %>
+        <%= link_to "Log in", new_session_path %>
+        <%= link_to "Sign up", sign_up_path %>
+      <% end %>
+    </nav>
+
+    <main>
+      <%= content_for?(:content) ? yield(:content) : yield %>
+    </main>
   </body>
 </html>
