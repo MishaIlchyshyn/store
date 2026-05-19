@@ -20,6 +20,9 @@ Rails.application.routes.draw do
   end
 
   namespace :store do
+    root to: redirect("/settings/products")
+
     resources :users
+    resources :products
   end
 end

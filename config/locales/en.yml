@@ -32,6 +32,11 @@ en:
     index:
       title: "Product List"
 
+  store:
+    products:
+      index:
+        title: "Product List"
+
   activerecord:
     attributes:
       user:
