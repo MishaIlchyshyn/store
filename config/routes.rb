@@ -2,8 +2,10 @@ Rails.application.routes.draw do
   root "products#index"
 
   resource :session
-  resources :passwords, param: :token
   resource :sign_up
+
+  resources :passwords, param: :token
+  resources :wishlists
 
   resources :products do
     resource :wishlist, only: [ :create ], module: :products
