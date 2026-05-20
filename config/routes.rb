@@ -5,7 +5,9 @@ Rails.application.routes.draw do
   resource :sign_up
 
   resources :passwords, param: :token
-  resources :wishlists
+  resources :wishlists do
+    resources :wishlist_products, only: [ :update, :destroy ], module: :wishlists
+  end
 
   resources :products do
     resource :wishlist, only: [ :create ], module: :products
