@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   resource :sign_up
 
   resources :products do
+    resource :wishlist, only: [ :create ], module: :products
     resources :subscribers, only: %i[create], controller: "products/subscribers"
     resource :unsubscribe, only: [ :show ], controller: "products/unsubscribe"
   end

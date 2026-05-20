@@ -1,4 +1,4 @@
-<%= render 'inventory', product: @product %>
+<%= link_to "Back", products_path %>
 
 <section class="product">
   <%= image_tag @product.featured_image if @product.featured_image.attached? %>
@@ -7,6 +7,7 @@
     <h1><%= @product.name %></h1>
     <%= @product.description %>
 
-    <%= link_to "Back", products_path %>
+    <%= render 'inventory', product: @product %>
+    <%= render "wishlist", product: @product %>
   </section>
 </section>
