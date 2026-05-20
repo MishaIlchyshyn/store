@@ -1,7 +1,7 @@
 module Store
   class WishlistsController < Store::BaseController
     def index
-      @wishlists = Wishlist.includes(:user)
+      @wishlists = Wishlist.includes(:user).filter_by(params)
     end
 
     def show
