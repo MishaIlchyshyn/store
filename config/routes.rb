@@ -2,10 +2,15 @@ Rails.application.routes.draw do
   root "products#index"
 
   resource :session
-  resources :passwords, param: :token
   resource :sign_up
 
+  resources :passwords, param: :token
+  resources :wishlists do
+    resources :wishlist_products, only: [ :update, :destroy ], module: :wishlists
+  end
+
   resources :products do
+    resource :wishlist, only: [ :create ], module: :products
     resources :subscribers, only: %i[create], controller: "products/subscribers"
     resource :unsubscribe, only: [ :show ], controller: "products/unsubscribe"
   end
@@ -24,5 +29,7 @@ Rails.application.routes.draw do
 
     resources :users
     resources :products
+    resources :wishlists
+    resources :subscribers
   end
 end
