@@ -13,3 +13,11 @@
     <small>Added <%= l it.created_at, format: :long %></small>
   </div>
 <% end %>
+
+
+<%= tag.button "Copy to clipboard",
+               data: {
+                 controller: :clipboard,
+                 action: "clipboard#copy",
+                 clipboard_text_value: wishlist_url(@wishlist)
+               } %>
