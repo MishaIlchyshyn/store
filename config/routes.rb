@@ -29,5 +29,6 @@ Rails.application.routes.draw do
 
     resources :users
     resources :products
+    resources :wishlists
   end
 end
