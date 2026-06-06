@@ -1,5 +1,9 @@
-<div>
-  <%= link_to subscriber.email, store_subscriber_path(subscriber) %> subscribed to
-  <%= link_to subscriber.product.name, store_product_path(subscriber.product) %> on
-  <%= l subscriber.created_at, format: :long %>
+<div class="flex items-center justify-between px-5 py-4 hover:bg-gray-50">
+  <div>
+    <%= link_to subscriber.email, store_subscriber_path(subscriber), class: "font-medium text-indigo-600 hover:text-indigo-800" %>
+    <span class="text-sm text-gray-500 ml-2">subscribed to
+      <%= link_to subscriber.product.name, store_product_path(subscriber.product), class: "text-gray-700 hover:text-gray-900" %>
+    </span>
+  </div>
+  <span class="text-xs text-gray-400"><%= l subscriber.created_at, format: :long %></span>
 </div>

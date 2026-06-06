@@ -1,11 +1,12 @@
-<h1><%= t '.title' %></h1>
+<div class="flex items-center justify-between mb-6">
+  <h1 class="text-2xl font-bold text-gray-900"><%= t '.title' %></h1>
+  <%= link_to "New product", new_store_product_path, class: "bg-indigo-600 text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-indigo-700" %>
+</div>
 
-<%= link_to "New Product", new_store_product_path %>
-
-<div style="margin-top: 20px", id="products">
+<div class="bg-white rounded-xl border border-gray-200 divide-y divide-gray-100">
   <% @products.each do |product| %>
-    <div>
-      <%= link_to product.name, store_product_path(product.id) %>
+    <div class="flex items-center justify-between px-5 py-4 hover:bg-gray-50">
+      <%= link_to product.name, store_product_path(product.id), class: "font-medium text-indigo-600 hover:text-indigo-800" %>
     </div>
   <% end %>
 </div>

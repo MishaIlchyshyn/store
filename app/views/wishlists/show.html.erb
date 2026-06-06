@@ -1,34 +1,52 @@
-<h1><%= @wishlist.name %></h1>
-
-<% if authenticated? && @wishlist.user == Current.user %>
-  <%= link_to "Edit", edit_wishlist_path(@wishlist) %>
-  <%= button_to "Delete", @wishlist, method: :delete, data: { turbo_confirm: "Are you sure?" } %>
-<% end %>
-
-<h3><%= pluralize @wishlist.products_count, "Product" %></h3>
-
-<% @wishlist.wishlist_products.includes(:product).each do %>
+<div class="flex items-start justify-between mb-6">
   <div>
-    <%= link_to it.product.name, it.product %>
-    <small>Added <%= l it.created_at, format: :long %></small>
-
-    <% if authenticated? && @wishlist.user == Current.user %>
-      <% if (other_wishlists = Current.user.wishlists.excluding(@wishlist)) && other_wishlists.any? %>
-        <%= form_with url: [ @wishlist, it ], method: :patch do |form| %>
-          <%= form.collection_select :new_wishlist_id, other_wishlists, :id, :name %>
-          <%= form.submit "Move" %>
-        <% end %>
-      <% end %>
-
-      <%= button_to "Remove", [ @wishlist, it ], method: :delete, data: { turbo_confirm: "Are you sure?" } %>
-    <% end %>
+    <h1 class="text-2xl font-bold text-gray-900"><%= @wishlist.name %></h1>
+    <p class="text-sm text-gray-500 mt-1"><%= pluralize @wishlist.products_count, "Product" %></p>
   </div>
-<% end %>
+  <% if authenticated? && @wishlist.user == Current.user %>
+    <div class="flex items-center gap-2">
+      <%= link_to "Edit", edit_wishlist_path(@wishlist), class: "border border-gray-300 text-gray-700 px-3 py-1.5 rounded-md text-sm hover:bg-gray-50" %>
+      <%= button_to "Delete", @wishlist, method: :delete,
+            data: { turbo_confirm: "Are you sure?" },
+            class: "bg-red-600 text-white px-3 py-1.5 rounded-md text-sm hover:bg-red-700 cursor-pointer" %>
+    </div>
+  <% end %>
+</div>
 
+<div class="bg-white rounded-xl border border-gray-200 divide-y divide-gray-100">
+  <% @wishlist.wishlist_products.includes(:product).each do %>
+    <div class="px-5 py-4">
+      <div class="flex items-center justify-between">
+        <div>
+          <%= link_to it.product.name, it.product, class: "font-medium text-indigo-600 hover:text-indigo-800" %>
+          <p class="text-xs text-gray-400 mt-0.5">Added <%= l it.created_at, format: :long %></p>
+        </div>
 
-<%= tag.button "Copy to clipboard",
-               data: {
-                 controller: :clipboard,
-                 action: "clipboard#copy",
-                 clipboard_text_value: wishlist_url(@wishlist)
-               } %>
+        <% if authenticated? && @wishlist.user == Current.user %>
+          <div class="flex items-center gap-2">
+            <% if (other_wishlists = Current.user.wishlists.excluding(@wishlist)) && other_wishlists.any? %>
+              <%= form_with url: [ @wishlist, it ], method: :patch, class: "flex items-center gap-2" do |form| %>
+                <%= form.collection_select :new_wishlist_id, other_wishlists, :id, :name, {},
+                      class: "rounded-md border border-gray-300 px-2 py-1 text-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500" %>
+                <%= form.submit "Move", class: "border border-gray-300 text-gray-700 px-3 py-1 rounded-md text-sm hover:bg-gray-50 cursor-pointer" %>
+              <% end %>
+            <% end %>
+            <%= button_to "Remove", [ @wishlist, it ], method: :delete,
+                  data: { turbo_confirm: "Are you sure?" },
+                  class: "text-red-600 text-sm hover:text-red-800 cursor-pointer bg-transparent border-0 p-0" %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+</div>
+
+<div class="mt-4">
+  <%= tag.button "Copy link to clipboard",
+                 class: "border border-gray-300 text-gray-700 px-4 py-2 rounded-md text-sm hover:bg-gray-50 cursor-pointer",
+                 data: {
+                   controller: :clipboard,
+                   action: "clipboard#copy",
+                   clipboard_text_value: wishlist_url(@wishlist)
+                 } %>
+</div>

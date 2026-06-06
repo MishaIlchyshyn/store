@@ -1,10 +1,18 @@
-<h1><%= @wishlist.name %></h1>
-<p>By <%= link_to @wishlist.user.full_name, store_user_path(@wishlist.user) %></p>
-
-<h3><%= pluralize @wishlist.products_count, "Product" %></h3>
-<% @wishlist.wishlist_products.includes(:product).each do %>
+<div class="flex items-center justify-between mb-6">
   <div>
-    <%= link_to it.product.name, store_product_path(it.product) %>
-    <small>Added <%= l it.created_at, format: :long %></small>
+    <h1 class="text-2xl font-bold text-gray-900"><%= @wishlist.name %></h1>
+    <p class="text-sm text-gray-500 mt-1">
+      by <%= link_to @wishlist.user.full_name, store_user_path(@wishlist.user), class: "text-indigo-600 hover:text-indigo-800" %>
+      &middot; <%= pluralize @wishlist.products_count, "product" %>
+    </p>
   </div>
-<% end %>
+</div>
+
+<div class="bg-white rounded-xl border border-gray-200 divide-y divide-gray-100">
+  <% @wishlist.wishlist_products.includes(:product).each do %>
+    <div class="flex items-center justify-between px-5 py-4">
+      <%= link_to it.product.name, store_product_path(it.product), class: "font-medium text-indigo-600 hover:text-indigo-800" %>
+      <span class="text-xs text-gray-400">Added <%= l it.created_at, format: :long %></span>
+    </div>
+  <% end %>
+</div>
