@@ -1,19 +1,25 @@
-<%= link_to "Back", store_products_path %>
+<%= link_to "← All products", store_products_path, class: "text-sm text-indigo-600 hover:text-indigo-800 mb-6 inline-block" %>
 
-<section class="product">
-  <%= image_tag @product.featured_image if @product.featured_image.attached? %>
+<div class="flex gap-8 items-start mb-8">
+  <% if @product.featured_image.attached? %>
+    <%= image_tag @product.featured_image, class: "w-1/2 rounded-xl shadow-sm object-cover" %>
+  <% end %>
 
-  <section class="product-info">
-    <h1><%= @product.name %></h1>
-    <%= @product.description %>
+  <div class="flex-1">
+    <h1 class="text-3xl font-bold text-gray-900 mb-3"><%= @product.name %></h1>
+    <div class="prose prose-sm text-gray-600 mb-6"><%= @product.description %></div>
 
-    <%= link_to "View in Storefront", @product %>
-    <%= link_to "Edit", edit_store_product_path(@product) %>
-    <%= button_to "Delete", [ :store, @product ], method: :delete, data: { turbo_confirm: "Are you sure?" } %>
-  </section>
-</section>
+    <div class="flex items-center gap-3">
+      <%= link_to "View in storefront", @product, class: "border border-gray-300 text-gray-700 px-3 py-1.5 rounded-md text-sm hover:bg-gray-50" %>
+      <%= link_to "Edit", edit_store_product_path(@product), class: "border border-indigo-600 text-indigo-600 px-3 py-1.5 rounded-md text-sm hover:bg-indigo-50" %>
+      <%= button_to "Delete", [ :store, @product ], method: :delete,
+            data: { turbo_confirm: "Are you sure?" },
+            class: "bg-red-600 text-white px-3 py-1.5 rounded-md text-sm hover:bg-red-700 cursor-pointer" %>
+    </div>
+  </div>
+</div>
 
-<section>
-  <%= link_to pluralize(@product.wishlists_count, "wishlist"), store_wishlists_path(product_id: @product) %>
-  <%= link_to pluralize(@product.subscribers.count, "subscriber"), store_subscribers_path(product_id: @product) %>
-</section>
+<div class="flex gap-4 text-sm">
+  <%= link_to pluralize(@product.wishlists_count, "wishlist"), store_wishlists_path(product_id: @product), class: "text-indigo-600 hover:text-indigo-800" %>
+  <%= link_to pluralize(@product.subscribers.count, "subscriber"), store_subscribers_path(product_id: @product), class: "text-indigo-600 hover:text-indigo-800" %>
+</div>

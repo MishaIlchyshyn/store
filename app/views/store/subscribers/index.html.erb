@@ -1,8 +1,15 @@
-<h1><%= pluralize @subscribers.count, "Subscriber" %></h1>
+<div class="flex items-center justify-between mb-6">
+  <h1 class="text-2xl font-bold text-gray-900"><%= pluralize @subscribers.count, "Subscriber" %></h1>
+</div>
 
-<%= form_with url: store_subscribers_path, method: :get do |form| %>
-  <%= form.collection_select :product_id, Product.all, :id, :name, selected: params[:product_id], include_blank: "All Products" %>
-  <%= form.submit "Filter" %>
-<% end %>
+<div class="bg-white rounded-xl border border-gray-200 p-4 mb-6">
+  <%= form_with url: store_subscribers_path, method: :get, class: "flex items-center gap-3" do |form| %>
+    <%= form.collection_select :product_id, Product.all, :id, :name, { selected: params[:product_id], include_blank: "All products" },
+          class: "rounded-md border border-gray-300 px-3 py-2 text-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500" %>
+    <%= form.submit "Filter", class: "bg-gray-100 text-gray-700 px-4 py-2 rounded-md text-sm font-medium hover:bg-gray-200 cursor-pointer" %>
+  <% end %>
+</div>
 
-<%= render @subscribers %>
+<div class="bg-white rounded-xl border border-gray-200 divide-y divide-gray-100">
+  <%= render @subscribers %>
+</div>

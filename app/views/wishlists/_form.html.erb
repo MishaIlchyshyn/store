@@ -1,15 +1,18 @@
-<%= form_with model: @wishlist do |form| %>
+<%= form_with model: @wishlist, class: "max-w-sm" do |form| %>
   <% if form.object.errors.any? %>
-    <div><%= form.object.errors.full_messages.to_sentence %></div>
+    <div class="mb-4 rounded-md bg-red-50 px-4 py-3 text-sm text-red-700 border border-red-200">
+      <%= form.object.errors.full_messages.to_sentence %>
+    </div>
   <% end %>
 
-  <div>
-    <%= form.label :name %>
-    <%= form.text_field :name %>
+  <div class="mb-4">
+    <%= form.label :name, class: "block text-sm font-medium text-gray-700 mb-1" %>
+    <%= form.text_field :name,
+          class: "block w-full rounded-md border border-gray-300 px-3 py-2 text-sm shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500" %>
   </div>
 
-  <div>
-    <%= form.submit %>
-    <%= link_to "Cancel", form.object.persisted? ? form.object : wishlists_path %>
+  <div class="flex items-center gap-3">
+    <%= form.submit class: "bg-indigo-600 text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-indigo-700 cursor-pointer" %>
+    <%= link_to "Cancel", form.object.persisted? ? form.object : wishlists_path, class: "text-sm text-gray-600 hover:text-gray-900" %>
   </div>
 <% end %>

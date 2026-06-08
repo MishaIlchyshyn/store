@@ -1,7 +1,10 @@
-<h1><%= pluralize @users.count, "user" %></h1>
+<h1 class="text-2xl font-bold text-gray-900 mb-6"><%= pluralize @users.count, "user" %></h1>
 
-<% @users.each do |user| %>
-  <div>
-    <%= link_to user.full_name, store_user_path(user) %>
-  </div>
-<% end %>
+<div class="bg-white rounded-xl border border-gray-200 divide-y divide-gray-100">
+  <% @users.each do |user| %>
+    <div class="flex items-center justify-between px-5 py-4 hover:bg-gray-50">
+      <%= link_to user.full_name, store_user_path(user), class: "font-medium text-indigo-600 hover:text-indigo-800" %>
+      <span class="text-sm text-gray-400"><%= user.email_address %></span>
+    </div>
+  <% end %>
+</div>

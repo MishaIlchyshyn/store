@@ -1,4 +1,8 @@
-<h1>Your Wishlists</h1>
+<div class="flex items-center justify-between mb-6">
+  <h1 class="text-2xl font-bold text-gray-900">Your Wishlists</h1>
+  <%= link_to "New wishlist", new_wishlist_path, class: "bg-indigo-600 text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-indigo-700" %>
+</div>
 
-<%= link_to "Create a wishlist", new_wishlist_path %>
-<%= render @wishlists %>
+<div class="bg-white rounded-xl border border-gray-200 divide-y divide-gray-100">
+  <%= render @wishlists %>
+</div>
