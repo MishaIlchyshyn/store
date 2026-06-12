@@ -1,15 +1,22 @@
-<%= link_to "← Back", products_path, class: "text-sm text-indigo-600 hover:text-indigo-800 mb-6 inline-block" %>
+<div id="product-show"
+     data-product-id="<%= @product.id %>"
+     data-product-name="<%= @product.name %>"
+     data-product-inventory-count="<%= @product.inventory_count %>"
+     data-product-description="<%= @product.description.to_plain_text %>"
+     data-product-image-attached="<%= @product.featured_image.attached? %>">
+  <%= link_to "← Back", products_path, class: "text-sm text-indigo-600 hover:text-indigo-800 mb-6 inline-block" %>
 
-<div class="flex gap-8 items-start">
-  <% if @product.featured_image.attached? %>
-    <%= image_tag @product.featured_image, class: "w-1/2 rounded-xl shadow-sm object-cover" %>
-  <% end %>
+  <div class="flex gap-8 items-start">
+    <% if @product.featured_image.attached? %>
+      <%= image_tag @product.featured_image, class: "w-1/2 rounded-xl shadow-sm object-cover" %>
+    <% end %>
 
-  <div class="flex-1">
-    <h1 class="text-3xl font-bold text-gray-900 mb-3"><%= @product.name %></h1>
-    <div class="prose prose-sm text-gray-600 mb-6"><%= @product.description %></div>
+    <div class="flex-1">
+      <h1 class="text-3xl font-bold text-gray-900 mb-3"><%= @product.name %></h1>
+      <div class="prose prose-sm text-gray-600 mb-6"><%= @product.description %></div>
 
-    <%= render 'inventory', product: @product %>
-    <%= render "wishlist", product: @product %>
+      <%= render 'inventory', product: @product %>
+      <%= render "wishlist", product: @product %>
+    </div>
   </div>
 </div>
