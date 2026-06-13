@@ -1,8 +1,8 @@
 <h1 class="text-2xl font-bold text-gray-900 mb-6"><%= t '.title' %></h1>
 
-<div class="bg-white rounded-xl border border-gray-200 divide-y divide-gray-100">
+<div id="products-list" class="bg-white rounded-xl border border-gray-200 divide-y divide-gray-100">
   <% @products.each do |product| %>
-    <div class="flex items-center justify-between px-5 py-4 hover:bg-gray-50">
+    <div data-product-id="<%= product.id %>" class="flex items-center justify-between px-5 py-4 hover:bg-gray-50">
       <%= link_to product.name, product_path(product.id), class: "font-medium text-indigo-600 hover:text-indigo-800" %>
     </div>
   <% end %>
